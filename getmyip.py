@@ -9,10 +9,11 @@ AWS_ACCESS_KEY_ID = 'AKIAIYJFCYZ5YGZFBGFQ'
 AWS_SECRET_ACCESS_KEY = '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'
 AWS_R53_ADDR = "test.manabu-yuzawa.org." # Should end in period
 AWS_R53_ZONE  = "Z69OGRXUK53QL"
+GET_IP_URL = "http://fedora22.manabu-yuzawa.org/cgi-bin/ip.py"
 # ===== END CONFIG ======
 
-#ip = urllib2.urlopen("http://54.64.116.168/cgi-bin/ip.py").read().strip()
-ip = "192.168.11.2"
+ip = urllib2.urlopen(GET_IP_URL).read().strip()
+#ip = "192.168.11.2"
 
 print ip
 
