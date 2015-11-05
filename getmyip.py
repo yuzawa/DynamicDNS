@@ -1,3 +1,4 @@
+#!/usr/bin/python
 import boto
 from boto.route53.record import ResourceRecordSets
 from boto.route53.connection import Route53Connection
