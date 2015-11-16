@@ -5,16 +5,19 @@ from boto.route53.connection import Route53Connection
 import urllib2
 from syslog import syslog
 
-# ======= CONFIG ========
-AWS_ACCESS_KEY_ID = 'AKIAIYJFCYZ5YGZFBGFQ'
-AWS_SECRET_ACCESS_KEY = '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'
-AWS_R53_ADDR = "home.manabu-yuzawa.org." # Should end in period
-AWS_R53_ZONE  = "Z69OGRXUK53QL"
-GET_IP_URL = "http://fedora.manabu-yuzawa.org/cgi-bin/ip.py"
-# ===== END CONFIG ======
+import ConfigParser
 
+config = ConfigParser.SafeConfigParser()
+config.read("./config")
+
+GET_IP_URL = config.get("settings","GET_IP_URL")
+AWS_ACCESS_KEY_ID = config.get("settings","AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = config.get("settings","AWS_SECRET_ACCESS_KEY")
+AWS_R53_ADDR = config.get("settings","AWS_R53_ADDR")
+AWS_R53_ZONE = config.get("settings","AWS_R53_ZONE")
+
+print GET_IP_URL
 ip = urllib2.urlopen(GET_IP_URL).read().strip()
-#ip = "192.168.11.2"
 
 print ip
 
