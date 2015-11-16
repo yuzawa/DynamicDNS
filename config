@@ -1,8 +1,0 @@
-[settings]
-AWS_ACCESS_KEY_ID = AKIAI5GIZTFSJHWCZS5A
-AWS_SECRET_ACCESS_KEY = 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
-#AWS_R53_ADDR = home.manabu-yuzawa.org.
-AWS_R53_ADDR = test.manabu-yuzawa.org.
-AWS_R53_ZONE  = Z69OGRXUK53QL
-GET_IP_URL = http://fedora.manabu-yuzawa.org/cgi-bin/ip.py
-
