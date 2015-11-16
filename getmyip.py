@@ -54,7 +54,7 @@ if __name__ == "__main__":
     config = ConfigParser.SafeConfigParser()
 
     try:
-        config.read("./configa")
+        config.read("./config")
 
         r53_ip_change(config)
 
