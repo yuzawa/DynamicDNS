@@ -9,10 +9,7 @@ from syslog import syslog
 
 import ConfigParser
 
-if __name__ == "__main__":
-
-    config = ConfigParser.SafeConfigParser()
-    config.read("./config")
+def r53_ip_change(config):
 
     GET_IP_URL = config.get("settings","GET_IP_URL")
     AWS_ACCESS_KEY_ID = config.get("settings","AWS_ACCESS_KEY_ID")
@@ -51,3 +48,18 @@ if __name__ == "__main__":
         print "Committing changes."
         r53rr.commit()
         print "Records updated with new IP at %s." % (ip)
+
+if __name__ == "__main__":
+
+    config = ConfigParser.SafeConfigParser()
+
+    try:
+        config.read("./configa")
+
+        r53_ip_change(config)
+
+    except ConfigParser.Error as e:
+        print("type:{0}".format(type(e)))
+        print("args:{0}".format(e.args))
+        print("message:{0}".format(e.message))
+        print("{0}".format(e))
