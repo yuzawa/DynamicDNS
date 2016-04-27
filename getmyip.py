@@ -16,38 +16,38 @@ def r53_ip_change(config):
     AWS_R53_ADDR = config.get("settings","AWS_R53_ADDR")
     AWS_R53_ZONE = config.get("settings","AWS_R53_ZONE")
 
-    print (GET_IP_URL)
+#    print (GET_IP_URL)
     ip = urllib.request.urlopen(GET_IP_URL).read().strip().decode('utf-8')
 
-    print( type(ip) )
-    print (ip)
+#    print( type(ip) )
+#    print (ip)
 
     r53 = Route53Connection(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY)
 
     records = r53.get_all_rrsets(AWS_R53_ZONE,'A',AWS_R53_ADDR,maxitems=1)[0]
 
-    print (records)
+#    print (records)
 
     oldip = records.resource_records[0]
 
-    print (oldip)
+#    print (oldip)
 
-    if ip in oldip:
-        print ("{0} exists for {1}".format(ip, AWS_R53_ADDR))
-    else:
-        print ("{0} does Not exist in {1}".format(ip, AWS_R53_ADDR))
-        print ("Current value is {0}.",format(oldip))
-        print ("Updating records.")
+    if ip not in oldip:
+        print("{0} does Not exist in {1}".format(ip, AWS_R53_ADDR))
+        print("Current value is {0}.",format(oldip))
+        print("Updating records.")
         r53rr = ResourceRecordSets(r53, AWS_R53_ZONE)
-        print ("Deleting old record.")
+        print("Deleting old record.")
         d_record = r53rr.add_change("DELETE", AWS_R53_ADDR, "A", 300)
         d_record.add_value(oldip)
-        print ("Creating updated record.")
+        print("Creating updated record.")
         c_record = r53rr.add_change("CREATE", AWS_R53_ADDR,"A", 300)
         c_record.add_value(ip)
-        print ("Committing changes.")
+        print("Committing changes.")
         r53rr.commit()
-        print ("Records updated with new IP at {0}.".format(ip))
+        print("Records updated with new IP at {0}.".format(ip))
+#    else:
+#        print("{0} exists for {1}".format(ip, AWS_R53_ADDR))
 
 if __name__ == "__main__":
 
