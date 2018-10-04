@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 import boto
 from boto.route53.record import ResourceRecordSets
@@ -54,7 +54,7 @@ if __name__ == "__main__":
     config = configparser.SafeConfigParser()
 
     try:
-        config.read("./config")
+        config.read("/usr/local/lib/getmyip/config")
 
         r53_ip_change(config)
 
