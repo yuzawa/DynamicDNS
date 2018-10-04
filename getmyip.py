@@ -26,8 +26,7 @@ def r53_ip_change(config):
 
     records = r53.get_all_rrsets(AWS_R53_ZONE,'A',AWS_R53_ADDR,maxitems=1)[0]
 
-#    print (records)
-
+#    print (records) 
     oldip = records.resource_records[0]
 
 #    print (oldip)
@@ -54,7 +53,7 @@ if __name__ == "__main__":
     config = configparser.SafeConfigParser()
 
     try:
-        config.read("/usr/local/lib/getmyip/config")
+        config.read("/usr/local/etc/getmyip/config")
 
         r53_ip_change(config)
 
